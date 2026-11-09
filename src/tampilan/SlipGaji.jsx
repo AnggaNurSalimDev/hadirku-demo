@@ -17,11 +17,11 @@ export default function SlipGaji({ slip }) {
   return (
     <div className="slip" id="slip-cetak">
       <div className="slip-kepala">
-        <strong>SLIP GAJI</strong>
-        <span>{namaPeriode(periode)}{slip.versi > 1 ? ` · Revisi ${slip.versi}` : ''}</span>
+        <strong>Slip gaji</strong>
+        <span>{namaPeriode(periode)}{slip.versi > 1 ? `, Revisi ${slip.versi}` : ''}</span>
       </div>
       <div className="kecil">
-        {pegawai.nama} · {pegawai.jabatan}
+        {pegawai.nama}, {pegawai.jabatan}
       </div>
       <table>
         <tbody>
@@ -53,11 +53,11 @@ export default function SlipGaji({ slip }) {
         </tbody>
       </table>
       <div className="kecil">
-        Kehadiran: hadir {kehadiran.hadir} · telat {kehadiran.telatMenit} mnt · lembur {kehadiran.lemburJam} j · bolos {kehadiran.bolos}
+        Kehadiran: hadir {kehadiran.hadir}, telat {kehadiran.telatMenit} mnt, lembur {kehadiran.lemburJam} j, bolos {kehadiran.bolos}
       </div>
       {rincian.infoPerusahaan.length > 0 && (
         <div className="info-kotak kecil">
-          <strong>Info — ditanggung perusahaan (tidak memotong gaji):</strong>
+          <strong>Ditanggung perusahaan, tidak memotong gaji</strong>
           {rincian.infoPerusahaan.map((x) => (
             <div key={x.label} className="baris-antara">
               <span>{x.label}</span>

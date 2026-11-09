@@ -27,9 +27,9 @@ export default function JabatanGaji() {
           const jumlah = state.pengguna.filter((p) => p.jabatanId === j.id && p.status === 'AKTIF').length
           return (
             <button key={j.id} className={`kartu kartu-klik ${dipilih === j.id ? 'aktif' : ''}`} onClick={() => setDipilih(j.id)}>
-              <strong>{j.nama.toUpperCase()}</strong>
+              <strong>{j.nama}</strong>
               <div className="kecil">
-                {a ? `${a.skema === 'HARIAN' ? 'Harian' : 'Bulanan'} · ${rupiah(a.nilaiDasar)}` : 'belum diatur'}
+                {a ? `${a.skema === 'HARIAN' ? 'Harian' : 'Bulanan'}, ${rupiah(a.nilaiDasar)}` : 'belum diatur'}
               </div>
               <div className="kecil redup">{jumlah} pegawai</div>
               {komp.map(({ komponen }) => (
@@ -122,7 +122,7 @@ function PanelJabatan({ jabatanId }) {
 
   return (
     <div className="kartu panel-jabatan">
-      <h4>{jabatan.nama.toUpperCase()}</h4>
+      <h4>{jabatan.nama}</h4>
       {!bisaUbah && <p className="kecil redup">Mode lihat. Hanya Kepala HR yang bisa mengubah aturan gaji.</p>}
       <fieldset disabled={!bisaUbah}>
         <div className="grid-form">
@@ -205,7 +205,7 @@ function PanelJabatan({ jabatanId }) {
         {uji?.galat && <div className="pesan pesan-gagal">✗ {uji.galat}</div>}
         {uji && !uji.galat && (
           <div className="kecil">
-            {uji.peg.nama} · {namaPeriode(uji.periode)} (data kehadiran nyata)
+            {uji.peg.nama}, {namaPeriode(uji.periode)} (data kehadiran nyata)
             <div className="baris-antara">
               <span>Sekarang</span>
               <strong>{uji.sebelum.valid ? rupiah(uji.sebelum.rincian.takeHome) : uji.sebelum.alasan}</strong>

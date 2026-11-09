@@ -73,7 +73,7 @@ export function buatDataAwal() {
   const dewi = { id: baru(), nama: 'Dewi Anggraini', peran: 'STAF_HR', jabatanId: null, status: 'AKTIF' }
   pengguna.push(ani, dewi)
 
-  const perangkat = pengguna.map((p) => ({ id: baru(), penggunaId: p.id, status: 'AKTIF', label: 'Android · Chrome' }))
+  const perangkat = pengguna.map((p) => ({ id: baru(), penggunaId: p.id, status: 'AKTIF', label: 'Android, Chrome' }))
 
   // Komponen (angka contoh, BUKAN tarif resmi)
   const komponen = [

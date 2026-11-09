@@ -11,8 +11,7 @@ export default function BarAtas() {
   return (
     <header className="bar-atas">
       <div className="merek">
-        <strong>Hadirku</strong> <span className="lencana lencana-peringatan">MODE DEMO</span>
-        <span className="kecil redup"> data hanya di browser ini</span>
+        <strong>Hadirku</strong> <span className="cap-demo">Demo</span>
       </div>
       <div className="kontrol">
         <label>
@@ -35,7 +34,7 @@ export default function BarAtas() {
           </select>
         </label>
         <span className="jam-demo" title="Jam server demo">
-          🕒 {tanggalPendek(state.jamDemo)} {jamMenit(state.jamDemo)}
+          {tanggalPendek(state.jamDemo)} {jamMenit(state.jamDemo)}
         </span>
         <button onClick={() => aksi.majuWaktu(JAM)}>+1 jam</button>
         <button onClick={() => aksi.hariBerikut()}>Besok 07:55</button>

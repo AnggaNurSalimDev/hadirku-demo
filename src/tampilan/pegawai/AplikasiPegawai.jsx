@@ -61,7 +61,7 @@ function Beranda() {
     const h = await aksi.absen({ kode: k })
     setSibuk(false)
     if (h.ok) {
-      setHasil({ ok: true, teks: `Absen ${h.baris.jenis === 'MASUK' ? 'masuk' : 'pulang'} tercatat ${jamMenit(h.baris.waktu)}` })
+      setHasil({ ok: true, cap: h.baris, teks: `Absen ${h.baris.jenis === 'MASUK' ? 'masuk' : 'pulang'} tercatat ${jamMenit(h.baris.waktu)}` })
       setMode(null)
       setKode('')
     } else {
@@ -84,8 +84,8 @@ function Beranda() {
         <div>
           Status: <strong>{LABEL_STATUS[st.status]}</strong>
         </div>
-        {st.masuk && <div className="redup">Masuk {jamMenit(st.masuk.waktu)} · {st.masuk.metode}</div>}
-        {st.pulang && <div className="redup">Pulang {jamMenit(st.pulang.waktu)} · {st.pulang.metode}</div>}
+        {st.masuk && <div>Masuk <span className="jam-cetak">{jamMenit(st.masuk.waktu)}</span> <span className="redup kecil">{NAMA_METODE[st.masuk.metode]}</span></div>}
+        {st.pulang && <div>Pulang <span className="jam-cetak">{jamMenit(st.pulang.waktu)}</span> <span className="redup kecil">{NAMA_METODE[st.pulang.metode]}</span></div>}
       </div>
 
       <button className="tombol-absen" disabled={!bisaAbsen || sibuk} onClick={() => kirim()}>
@@ -125,13 +125,27 @@ function Beranda() {
         </div>
       )}
 
-      <Pesan hasil={hasil} />
+      {hasil?.cap ? <CapWaktu baris={hasil.cap} teks={hasil.teks} /> : <Pesan hasil={hasil} />}
 
       {st.status === 'SEDANG_KERJA' && state.jamDemo < st.shift.selesai && (
         <button className="tombol-demo" onClick={() => aksi.majuWaktu(st.shift.selesai + 5 * MENIT - state.jamDemo)}>
           ⏩ Lompat ke jam pulang (demo)
         </button>
       )}
+    </div>
+  )
+}
+
+const NAMA_METODE = { WIFI: 'lewat WiFi kantor', TOTP: 'lewat kode HP lokasi', MANUAL: 'dicatat HR', KOREKSI: 'hasil koreksi' }
+
+function CapWaktu({ baris, teks }) {
+  return (
+    <div className="cap-waktu" role="status" aria-label={teks}>
+      <span className="tinta" key={baris.waktu}>
+        <span className="jenis">{baris.jenis === 'MASUK' ? 'Masuk' : 'Pulang'}</span>
+        <span className="jam">{jamMenit(baris.waktu)}</span>
+      </span>
+      <span className="metode">{NAMA_METODE[baris.metode]}</span>
     </div>
   )
 }
@@ -163,7 +177,7 @@ function Riwayat() {
         </select>
       </div>
       <div className="kartu kecil">
-        Hadir {rekap.hadir} · Telat {rekap.telatMenit} mnt · Lembur {rekap.lemburJam} j · Bolos {rekap.bolos}
+        Hadir {rekap.hadir}, Telat {rekap.telatMenit} mnt, Lembur {rekap.lemburJam} j, Bolos {rekap.bolos}
         {rekap.perluKoreksi > 0 && <div className="teks-gagal">❗ {rekap.perluKoreksi} perlu koreksi</div>}
       </div>
       <ul className="daftar">
@@ -173,7 +187,7 @@ function Riwayat() {
             <li key={s.shiftId}>
               <div className="baris-antara">
                 <span>
-                  {tanggalPendek(s.mulai)} {s.status !== 'LIBUR' && <span className="redup">{s.masuk ? jamMenit(s.masuk) : '??'}–{s.pulang ? jamMenit(s.pulang) : '??'}</span>}
+                  {tanggalPendek(s.mulai)} {s.status !== 'LIBUR' && <span className="jam-cetak">{s.masuk ? jamMenit(s.masuk) : '--:--'} {s.pulang ? jamMenit(s.pulang) : '--:--'}</span>}
                 </span>
                 <span>
                   {IKON[s.status]} {s.status === 'LIBUR' ? 'libur' : ''}
@@ -299,7 +313,7 @@ function Profil() {
         <div className="redup">{j?.nama ?? 'HR'}</div>
       </div>
       <div className="kartu kecil">
-        HP terdaftar: {d ? `${d.label} · aktif` : 'tidak ada'}
+        HP terdaftar: {d ? `${d.label}, aktif` : 'tidak ada'}
         <div className="redup">Ganti HP? Hubungi HR untuk kode aktivasi baru.</div>
       </div>
       <p className="kecil redup">Tidak ada password: HP ini sendiri adalah kuncinya (tanda tangan perangkat).</p>

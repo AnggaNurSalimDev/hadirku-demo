@@ -24,14 +24,14 @@ export default function HpLokasi() {
 
   return (
     <div className="panel hp-lokasi">
-      <div className="judul-panel">📱 HP Lokasi · {lokasi.nama}</div>
+      <div className="judul-panel">HP Lokasi, {lokasi.nama}</div>
       <div className="totp">
         <div>
           <div className="kode">{kode ? `${kode.slice(0, 3)} ${kode.slice(3)}` : '—'}</div>
           <div className="bilah">
             <div style={{ width: `${(sisa / LANGKAH_DETIK) * 100}%` }} />
           </div>
-          <div className="kecil redup">berganti dalam {sisa} dtk · kunci v{lokasi.versiKunci}</div>
+          <div className="kecil redup">berganti dalam {sisa} dtk, kunci v{lokasi.versiKunci}</div>
         </div>
         {qr && <img src={qr} alt={`QR berisi kode ${kode}`} width={96} height={96} />}
       </div>

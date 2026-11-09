@@ -86,7 +86,7 @@ function Dashboard() {
 
   return (
     <div>
-      <h3>Hari ini · {tanggalPendek(state.jamDemo)}</h3>
+      <h3>Hari ini, {tanggalPendek(state.jamDemo)}</h3>
       <div className="kecil">
         Lokasi {lokasi.nama}: <Lencana jenis={ipSegar ? 'ok' : 'gagal'}>IP {ipSegar ? 'OK' : 'basi'}</Lencana>{' '}
         <Lencana jenis="ok">kunci v{lokasi.versiKunci}</Lencana>
@@ -148,11 +148,11 @@ function Persetujuan() {
             const bukti = absenUntukShift(state.absen, shift)
             return (
               <div key={k.id} className="kartu">
-                <strong>{nama(k.penggunaId)}</strong> · {tanggalPendek(shift.mulai)} · {k.jenis.toLowerCase()} {jamMenit(k.waktuUsulan)}
+                <strong>{nama(k.penggunaId)}</strong>, {tanggalPendek(shift.mulai)}, {k.jenis.toLowerCase()} {jamMenit(k.waktuUsulan)}
                 <div className="kecil">“{k.alasan}”</div>
                 <div className="kecil redup">
                   Bukti: {bukti.length ? bukti.map((a) => `${a.jenis.toLowerCase()} ${jamMenit(a.waktu)} via ${a.metode}`).join(', ') : 'tidak ada absen'}
-                  {' · '}shift {jamMenit(shift.mulai)}–{jamMenit(shift.selesai)}
+                  {', '}shift {jamMenit(shift.mulai)}–{jamMenit(shift.selesai)}
                 </div>
                 <div className="baris">
                   <input placeholder="Catatan (wajib jika tolak)" value={catatan[k.id] ?? ''} onChange={(e) => setCatatan({ ...catatan, [k.id]: e.target.value })} />
@@ -170,7 +170,7 @@ function Persetujuan() {
               <ul className="daftar kecil">
                 {selesai.map((k) => (
                   <li key={k.id}>
-                    {nama(k.penggunaId)} · {k.jenis.toLowerCase()} {jamMenit(k.waktuUsulan)} → <strong>{k.status}</strong> oleh {nama(k.diputusOleh)}
+                    {nama(k.penggunaId)}, {k.jenis.toLowerCase()} {jamMenit(k.waktuUsulan)} → <strong>{k.status}</strong> oleh {nama(k.diputusOleh)}
                   </li>
                 ))}
               </ul>
@@ -338,7 +338,7 @@ function Jadwal() {
       <p className="kecil redup">
         {Object.entries(TIPE_SHIFT)
           .map(([k, t]) => (k === 'L' ? `${k} = ${t.label}` : `${k} = ${t.label} ${String(t.mulaiJam).padStart(2, '0')}:00–${String(t.mulaiJam + t.durasiJam).padStart(2, '0')}:00`))
-          .join(' · ')}
+          .join(', ')}
         . Hanya jadwal mulai besok yang bisa diubah.
       </p>
     </div>
@@ -359,7 +359,7 @@ function Pengaturan() {
       {!kepala && <p className="kecil redup">Hanya Kepala HR yang bisa mengubah pengaturan.</p>}
       <Pesan hasil={hasil} />
       <div className="kartu">
-        <strong>Perangkat lokasi · {lokasi.nama}</strong>
+        <strong>Perangkat lokasi, {lokasi.nama}</strong>
         <div className="kecil">IP kantor terakhir: {lokasi.ipTerakhir} (dilapor {jamMenit(lokasi.ipDilaporPada)})</div>
         <div className="kecil">Versi kunci TOTP: {lokasi.versiKunci}</div>
         <button
@@ -377,7 +377,7 @@ function Pengaturan() {
         {hr.map((x) => (
           <div key={x.id} className="baris-antara kecil">
             <span>
-              {x.nama} · {namaPeran(x.peran)} <Lencana jenis={x.status === 'AKTIF' ? 'ok' : 'gagal'}>{x.status}</Lencana>
+              {x.nama}, {namaPeran(x.peran)} <Lencana jenis={x.status === 'AKTIF' ? 'ok' : 'gagal'}>{x.status}</Lencana>
             </span>
             <button
               className="kecil"

@@ -91,7 +91,7 @@ export const SKENARIO = [
     ringkas: 'Kepala HR mengatur komponen sendiri',
     siapkan: (s) => ({ pelakuId: cari(s, 'Ani'), ui: { menuHr: 'jabatan' } }),
     langkah: [
-      { teks: 'Ani (Kepala HR) membuka Jabatan & Gaji. Klik kartu SENIOR.' },
+      { teks: 'Ani (Kepala HR) membuka Jabatan & Gaji. Klik kartu Senior.' },
       { teks: 'Ubah nilai uang makan, lalu tekan "Coba hitung" untuk melihat dampaknya pada gaji Rina sebelum menyimpan.' },
       { teks: 'Simpan = versi baru dengan tanggal berlaku. Slip yang sudah final tidak ikut berubah.' },
     ],

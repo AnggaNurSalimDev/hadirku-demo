@@ -16,7 +16,7 @@ export default function PanelServer() {
           <div className="redup kecil">Hasil setiap tindakan akan muncul di sini.</div>
         )}
         <button className="tautan" onClick={() => aksi.aturUi({ lapis2: true })}>
-          🔍 Lihat cara kerja
+          Lihat cara kerja
         </button>
       </div>
     )
@@ -25,7 +25,7 @@ export default function PanelServer() {
   return (
     <div className="panel panel-server">
       <div className="baris-antara">
-        <div className="judul-panel">📋 Yang terjadi di server</div>
+        <div className="judul-panel">Yang terjadi di server</div>
         <button className="tautan" onClick={() => aksi.aturUi({ lapis2: false })}>
           Sembunyikan
         </button>

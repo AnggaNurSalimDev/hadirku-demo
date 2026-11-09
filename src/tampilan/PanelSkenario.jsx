@@ -43,7 +43,7 @@ export default function PanelSkenario() {
           kehadiran dan aturan yang Anda atur sendiri, lalu slip langsung terbit.
         </p>
       </div>
-      <div className="kecil">Coba skenario terpandu:</div>
+      <h4>Coba lewat cerita</h4>
       <div className="daftar-skenario">
         {SKENARIO.map((s) => (
           <button key={s.id} onClick={() => aksi.mulaiSkenario(s.id)}>

@@ -18,7 +18,7 @@ export default function App() {
       <PanelSkenario />
       <main className={`panggung ${modeHr ? 'mode-hr' : 'mode-pegawai'}`}>
         <div className="kolom-perangkat">
-          <div className="label-perangkat">{modeHr ? '💻 Laptop HR' : '📱 HP Pegawai'}</div>
+          <div className="label-perangkat">{modeHr ? 'Laptop HR' : 'HP Pegawai'}</div>
           {modeHr ? <AplikasiHr /> : <AplikasiPegawai />}
         </div>
         <div className="kolom-samping">
@@ -27,7 +27,7 @@ export default function App() {
         </div>
       </main>
       <footer className="kaki kecil redup">
-        Demo Hadirku · semua data fiktif dan hanya tersimpan di browser ini · angka BPJS/pajak hanya contoh, bukan tarif resmi
+        Demo Hadirku, semua data fiktif dan hanya tersimpan di browser ini, angka BPJS/pajak hanya contoh, bukan tarif resmi
       </footer>
     </div>
   )
